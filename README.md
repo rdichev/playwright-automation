@@ -7,7 +7,7 @@ This project is an automation framework built using Playwright and TypeScript. I
 ```
 playwright-automation
 ├── tests
-│   ├── example.spec.ts
+│   ├── homepage.spec.ts
 ├── playwright.config.ts
 ├── package.json
 ├── tsconfig.json
