@@ -8,7 +8,7 @@ export class HomePage {
     }
 
     async goto() {
-        await this.page.goto('http://localhost:3000/');
+        await this.page.goto('https://salespulse-ai-b7acd.web.app/');
     }
 
     async getTitle() {

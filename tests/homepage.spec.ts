@@ -12,6 +12,6 @@ test.describe('HomePage Test Suite', () => {
     test('should load the correct URL', async ({ page }) => {
         const homePage = new HomePage(page);
         await homePage.goto();
-        expect(await homePage.getUrl()).toBe('http://localhost:3000/');
+        expect(await homePage.getUrl()).toBe('https://salespulse-ai-b7acd.web.app/');
     });
 });
