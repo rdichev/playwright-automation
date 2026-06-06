@@ -10,7 +10,8 @@
     "rootDir": "./"
   },
   "include": [
-    "../tests/**/*.ts",
+    "./tests/**/*.ts",
+    "./pages/**/*.ts",
     "playwright.config.ts"
   ],
   "exclude": [
