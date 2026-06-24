@@ -6,3 +6,15 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# IDE
+.idea/
+.vscode/
+
+# MCP tool session artifacts
+.playwright-mcp/
+
+# Ad-hoc screenshots in project root
+/*.png
+/*.jpeg
+/*.jpg

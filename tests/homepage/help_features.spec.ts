@@ -3,24 +3,46 @@
 
 import { test, expect } from '@playwright/test';
 
+const BASE_URL = 'https://salespulse-ai-b7acd.web.app/';
+
 test.describe('Homepage Functionality', () => {
   test('Test Help & Features modal', async ({ page }) => {
-    // Navigate to the homepage URL
-    await page.goto('https://salespulse-ai-b7acd.web.app/');
+    await page.goto(BASE_URL);
 
-    // 1. Click on the 'Help & Features' button
     await page.getByRole('button', { name: 'Help & Features' }).click();
 
-    // expect: Help & Features modal opens with 'Platform Features' heading
     await expect(page.getByRole('heading', { name: 'Platform Features' })).toBeVisible();
-
-    // expect: detailed feature descriptions
     await expect(page.getByText('Guide to using SalesPulse AI')).toBeVisible();
 
-    // 2. Click on the 'Got it' button in the modal
     await page.getByRole('button', { name: 'Got it' }).click();
 
-    // expect: Modal closes and page returns to original state
     await expect(page.getByText('Upload Sales Call')).toBeVisible();
+  });
+
+  test('Close Help & Features modal via X button', async ({ page }) => {
+    await page.goto(BASE_URL);
+
+    await page.getByRole('button', { name: 'Help & Features' }).click();
+    await expect(page.getByRole('heading', { name: 'Platform Features' })).toBeVisible();
+
+    // Close via the X button — scope to the modal overlay to avoid matching nav buttons
+    const modalOverlay = page.locator('div[class*="fixed"][class*="inset-0"]');
+    await modalOverlay.getByRole('button').filter({ hasNotText: 'Got it' }).click();
+
+    await expect(page.getByRole('heading', { name: 'Platform Features' })).not.toBeVisible();
+    await expect(page.getByText('Upload Sales Call')).toBeVisible();
+  });
+
+  test('Help & Features modal shows all feature sections', async ({ page }) => {
+    await page.goto(BASE_URL);
+
+    await page.getByRole('button', { name: 'Help & Features' }).click();
+
+    await expect(page.getByRole('heading', { name: 'Smart Audio Ingestion' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Multi-Model Intelligence' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Automated Scorecard' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Sentiment & Coaching' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Interactive Transcript' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'PDF Reporting' })).toBeVisible();
   });
 });
